@@ -32,9 +32,11 @@ let resNum = 0;
 
 const runReq = () => {
   
-  console.log('req-num:', ++reqNum);
+  console.log('req-num1:', ++reqNum);
   
   runLimited(cb => {
+  
+    console.log('req-num2:', ++reqNum);
     
     const r = http.get({
       host: 'localhost',

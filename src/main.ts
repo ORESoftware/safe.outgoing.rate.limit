@@ -18,6 +18,43 @@ export interface QueueItem {
 
 export const makeLimit = (millis: number, count: number) => {
   
+  const queuedTasks = new LinkedQueue<EVCb<any>>();
+  let running = 0, blocked = false;
+  
+  return function run(cb: EVCb<any>, add?: boolean) {
+    
+    if (running >= count) {
+      return queuedTasks.enqueue(cb);
+    }
+  
+    if(!add){
+      running++;
+    }
+    
+    cb(() => {
+      
+      running--;
+      
+      const v = queuedTasks.dequeue();
+      
+      if (!v) {
+        return;
+      }
+      
+      running++;
+      
+      setTimeout(() => {
+        run(v.value, true);
+      }, millis);
+      
+    });
+    
+  }
+  
+};
+
+export const makeLimit4 = (millis: number, count: number) => {
+  
   const q = async.queue<Task>((task, cb) => task(cb), count + 1);
   const queuedTasks = new LinkedQueue<EVCb<any>>();
   let running = 0;
