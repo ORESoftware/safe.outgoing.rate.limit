@@ -23,7 +23,7 @@ export const makeLimit = (millis: number, count: number) => {
   
   return function run(cb: EVCb<any>, add?: boolean) {
     
-    if (running >= count) {
+    if (!add && running >= count) {
       return queuedTasks.enqueue(cb);
     }
   
