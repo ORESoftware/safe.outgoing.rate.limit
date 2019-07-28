@@ -1,0 +1,42 @@
+{
+  "name": "@ores/outgoing-safe-rate-limit",
+  "version": "0.0.1001",
+  "description": "Semver-oriented TypeScript library skeleton.",
+  "main": "dist/main.js",
+  "bin": {
+    "example": "cli/example.sh",
+    "example.js": "cli/example.js"
+  },
+  "types": "dist/main.d.ts",
+  "typings": "dist/main.d.ts",
+  "scripts": {
+    "test": "suman test",
+    "postinstall": "./assets/postinstall.sh",
+    "xyz": "./scripts/npm/xyz.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ORESoftware/typescript-library-skeleton.git"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "skeleton",
+    "scaffold"
+  ],
+  "author": "YOUR NAME HERE",
+  "license": "SEE LICENSE IN license.md",
+  "bugs": {
+    "url": "https://github.com/ORESoftware/typescript-library-skeleton/issues"
+  },
+  "homepage": "https://github.com/ORESoftware/typescript-library-skeleton#readme",
+  "dependencies": {
+    "@oresoftware/linked-queue": "^0.1.104",
+    "async": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/async": "^3.0.1",
+    "@types/node": "^10.12.10",
+    "typescript": "^3.4.5"
+  }
+}
