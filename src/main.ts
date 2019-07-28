@@ -22,9 +22,11 @@ export const makeLimit = (millis: number, count: number) => {
   const queuedTasks = new LinkedQueue<EVCb<any>>();
   let running = 0;
   
-  return (cb: EVCb<any>) => {
+  return function run(cb: EVCb<any>, add?: boolean) {
     
-    running++;
+    if (!add) {
+      running++;
+    }
     
     if (running > count) {
       return queuedTasks.enqueue(cb);
@@ -39,15 +41,14 @@ export const makeLimit = (millis: number, count: number) => {
       const v = queuedTasks.dequeue();
       
       if (!v) {
-        throw 'no queue item';
         return;
       }
       
-      q.push(cb => {
-        setTimeout(() => {
-          v.value(cb);
-        }, millis);
-      });
+      running++;
+      
+      setTimeout(() => {
+        run(v.value, true);
+      }, millis);
       
     });
     
